@@ -1,0 +1,11 @@
+
+services:
+  golang-service:
+    build: 
+      context: .
+    container_name: golang-service
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"
+    command: app
