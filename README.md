@@ -25,3 +25,10 @@ Para rodar os testes:
 go test ./...
 ```
 
+Também é possível utilizar o Makefile incluído no projeto para facilitar essas tarefas:
+
+```bash
+make run   # inicia a aplicação
+make test  # executa os testes
+make lint  # verifica o código
+```
