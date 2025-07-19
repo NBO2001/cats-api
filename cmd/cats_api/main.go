@@ -11,5 +11,7 @@ func main() {
 
 	router.RouterCreate(r)
 
-	r.Run("0.0.0.0:8080")
+       if err := r.Run("0.0.0.0:8080"); err != nil {
+               panic(err)
+       }
 }

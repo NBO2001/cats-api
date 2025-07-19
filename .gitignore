@@ -19,3 +19,6 @@ go.work
 
 # Go module files
 go.sum
+
+# Application binary
+app
