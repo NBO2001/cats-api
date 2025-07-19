@@ -5,8 +5,9 @@ import (
 )
 
 func Router(r *gin.Engine) {
-
 	r.GET("/cats", getCats)
-	// r.POST("/cats", postCats)
-	// r.GET("/cats/:id", getCatByID)
+	r.POST("/cats", postCat)
+	r.GET("/cats/:id", getCatByID)
+	r.PUT("/cats/:id", updateCat)
+	r.DELETE("/cats/:id", deleteCat)
 }

@@ -10,3 +10,18 @@ docker compose up -d
 ```
 
 O projeto iniciará na porta 8080 do localhost. :)
+
+## Rotas
+
+* `GET /cats` - lista todos os gatos
+* `POST /cats` - cria um novo gato
+* `GET /cats/:id` - retorna um gato especifico
+* `PUT /cats/:id` - atualiza um gato
+* `DELETE /cats/:id` - remove um gato
+
+Para rodar os testes:
+
+```bash
+go test ./...
+```
+
