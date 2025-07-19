@@ -30,7 +30,7 @@ func TestCRUD(t *testing.T) {
 	router := setupRouter()
 
 	// create
-	newCat := cat{ID: "4", Name: "NewCat", Breed: "Mixed", Age: 1}
+	newCat := cat{Name: "NewCat", Breed: "Mixed", Age: 1}
 	body, _ := json.Marshal(newCat)
 	req, _ := http.NewRequest(http.MethodPost, "/cats", bytes.NewBuffer(body))
 	resp := httptest.NewRecorder()
@@ -38,9 +38,13 @@ func TestCRUD(t *testing.T) {
 	if resp.Code != http.StatusCreated {
 		t.Fatalf("expected status %d, got %d", http.StatusCreated, resp.Code)
 	}
+	var created cat
+	if err := json.Unmarshal(resp.Body.Bytes(), &created); err != nil {
+		t.Fatalf("failed to parse response: %v", err)
+	}
 
 	// read
-	req, _ = http.NewRequest(http.MethodGet, "/cats/4", nil)
+	req, _ = http.NewRequest(http.MethodGet, "/cats/"+created.ID, nil)
 	resp = httptest.NewRecorder()
 	router.ServeHTTP(resp, req)
 	if resp.Code != http.StatusOK {
@@ -48,9 +52,9 @@ func TestCRUD(t *testing.T) {
 	}
 
 	// update
-	updated := cat{ID: "4", Name: "Updated", Breed: "Mixed", Age: 2}
+	updated := cat{Name: "Updated", Breed: "Mixed", Age: 2}
 	body, _ = json.Marshal(updated)
-	req, _ = http.NewRequest(http.MethodPut, "/cats/4", bytes.NewBuffer(body))
+	req, _ = http.NewRequest(http.MethodPut, "/cats/"+created.ID, bytes.NewBuffer(body))
 	resp = httptest.NewRecorder()
 	router.ServeHTTP(resp, req)
 	if resp.Code != http.StatusOK {
@@ -58,7 +62,7 @@ func TestCRUD(t *testing.T) {
 	}
 
 	// delete
-	req, _ = http.NewRequest(http.MethodDelete, "/cats/4", nil)
+	req, _ = http.NewRequest(http.MethodDelete, "/cats/"+created.ID, nil)
 	resp = httptest.NewRecorder()
 	router.ServeHTTP(resp, req)
 	if resp.Code != http.StatusNoContent {
