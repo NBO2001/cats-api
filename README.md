@@ -1,25 +1,38 @@
-# Cats api
+# Cats API
 
-Api feita com o objetivo de aprende golang, sem se preocupar com estruta de código nem nada similar.
-O objetivo puro é entender a linguagem e como ela funciona, seus tipos e sintaxe.
+This project provides a small REST service for managing cats. It was created as
+a learning exercise to showcase how to build an API in Go using the Gin
+framework. The service keeps data in memory and is not intended for production
+use.
 
-Para executar esse projeto use o comando:
+## Running with Docker
+
+Launch the API with Docker Compose:
 
 ```bash
 docker compose up -d
 ```
 
-O projeto iniciará na porta 8080 do localhost. :)
+Once the container starts, the API will be available at
+<http://localhost:8080>.
 
-## Rotas
+You can also run the application directly on your machine:
 
-* `GET /cats` - lista todos os gatos
-* `POST /cats` - cria um novo gato
-* `GET /cats/:id` - retorna um gato especifico
-* `PUT /cats/:id` - atualiza um gato
-* `DELETE /cats/:id` - remove um gato
+```bash
+go run ./cmd/cats_api
+```
 
-Para rodar os testes:
+## Routes
+
+* `GET /cats` – list all cats
+* `POST /cats` – create a new cat
+* `GET /cats/:id` – retrieve a cat by ID
+* `PUT /cats/:id` – update a cat
+* `DELETE /cats/:id` – remove a cat
+
+## Tests
+
+Run the unit tests with:
 
 ```bash
 go test ./...
